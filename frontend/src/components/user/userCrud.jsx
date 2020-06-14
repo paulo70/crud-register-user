@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
-import Main  from '../template/main'
-import Form  from '../template/form'
-import Input from '../template/formGroup'
-import Grid  from '../../utils/grids'
-import Row   from '../../utils/row'
+import Main   from '../template/main'
+import Form   from '../template/form'
+import Input  from '../template/formGroup'
+import Grid   from '../../utils/grids'
+import Row    from '../../utils/row'
+import Button from '../../utils/button'
 
 const headerProps = {
   icon: 'users',
@@ -63,25 +64,39 @@ class User extends Component {
   renderForm() {
     return (
       <Form>
-        <Grid cols='12 6'>
-          <Input
-            label = 'name'
-            name  = 'name'
-            value = { this.state.user.name }
-            placeholder = 'Digite o nome'
-            fn = { e => this.updateField(e) }
-            />
-        </Grid>
+        <Row>
+          <Grid cols='12 6'>
+            <Input
+              label = 'name'
+              name  = 'name'
+              value = { this.state.user.name }
+              placeholder = 'Digite o nome'
+              fn = { e => this.updateField(e) }
+              />
+          </Grid>
 
-        <Grid cols='12 6'>
-          <Input
-            label = 'email'
-            name  = 'email'
-            value = { this.state.user.email }
-            placeholder = 'Digite o e-mail'
-            fn = { e => this.updateField(e) }
-            />
-        </Grid>
+          <Grid cols='12 6'>
+            <Input
+              label = 'email'
+              name  = 'email'
+              value = { this.state.user.email }
+              placeholder = 'Digite o e-mail'
+              fn = { e => this.updateField(e) }
+              />
+          </Grid>
+        </Row>
+        <Row>
+          <Grid cols='12'>
+            <Button classes='btn btn-primary' fn={e => this.save(e)}>
+              Salvar
+            </Button>
+
+            <Button classes='btn btn-secondary ml-2' fn={e => this.clear(e)}>
+              Cancelar
+            </Button>
+
+          </Grid>
+        </Row>
       </Form>
     )
   }

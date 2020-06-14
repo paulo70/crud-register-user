@@ -5,7 +5,5 @@ import Grid from '../../utils/grids'
 
 export default props =>
   <div className='form'>
-    <Row>
-      { props.children }
-    </Row>
+    { props.children }
   </div>
