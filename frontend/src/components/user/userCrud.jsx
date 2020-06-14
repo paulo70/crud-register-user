@@ -16,23 +16,24 @@ const headerProps = {
 
 const baseURL = 'http://localhost:3001/users'
 
+const initialState = {
+    user: { name: '', email: '' },
+    list: []
+}
+
 class User extends Component {
 
   constructor(props){
     super(props)
 
     this.state = {
-      user: {
-        name:'',
-        email:''
-      },
-
+      user: { name:'', email:'' },
       list: []
     }
   }
 
   clear(){
-    this.setState({ user: this.state.user })
+    this.setState({ user: initialState.user })
   }
 
   save(){
@@ -43,7 +44,7 @@ class User extends Component {
     axios[method](url, user)
       .then(resp => {
         const list = this.getUpdatedList(resp.data)
-        this.setState({ user: this.state.user, list })
+        this.setState({ user: initialState.user, list })
       })
   }
 
