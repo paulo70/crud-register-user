@@ -1,0 +1,11 @@
+aside.brand {
+  background-color: var(--bg-dark);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+aside.brand img {
+  padding: 0px 15px;
+  width: 100%;
+}
