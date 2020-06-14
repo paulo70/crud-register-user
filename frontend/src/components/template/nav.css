@@ -11,9 +11,6 @@ aside.menu-area {
   text-decoration: none;
   font-weight: 300;
   padding: 15px;
-}
-
-.menu a:not([href]):not([tabindex]){
   color: #fff;
 }
 
