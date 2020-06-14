@@ -7,5 +7,9 @@ header.header{
 }
 
 header.header h1{
-  font-size: 1.8em;
+  font-size: 1.3em;
+}
+
+header.header p{
+  font-size: 15px;
 }
