@@ -4,6 +4,10 @@ import axios from 'axios'
 import Main   from '../template/main'
 import Form   from '../template/form'
 import Input  from '../template/formGroup'
+import Table  from '../template/table'
+import Thead  from '../template/tableHead'
+import Tbody  from '../template/tableBody'
+
 import Grid   from '../../utils/grids'
 import Row    from '../../utils/row'
 import Button from '../../utils/button'
@@ -34,6 +38,11 @@ class User extends Component {
     this.updateField = this.updateField.bind(this)
     this.save        = this.save.bind(this)
     this.clear       =  this.clear.bind(this)
+  }
+
+  componentWillMount(){
+    axios(baseURL)
+      .then(resp => this.setState({ list: resp.data }))
   }
 
   clear(){
@@ -106,11 +115,48 @@ class User extends Component {
     )
   }
 
+  renderRows(){
+    return this.state.list.map(user => {
+      return (
+        <tr key={user.id}>
+          <td>{user.id}</td>
+          <td>{user.name}</td>
+          <td>{user.email}</td>
+          <td>
+            <Button classes='btn btn-warning'>
+              <i className='fa fa-pencil'></i>
+            </Button>
+
+            <Button classes='btn btn-danger ml-2'>
+              <i className='fa fa-trash'></i>
+            </Button>
+          </td>
+        </tr>
+      )
+    })
+  }
+
+  renderTable(){
+    return (
+      <Table>
+        <Thead>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+        </Thead>
+
+        <Tbody>
+          {this.renderRows()}
+        </Tbody>
+      </Table>
+    )
+  }
+
   render(){
     return (
       <Main  {...headerProps}>
-        Register User
         {this.renderForm()}
+        {this.renderTable()}
       </Main>
 
     )
