@@ -30,6 +30,10 @@ class User extends Component {
       user: { name:'', email:'' },
       list: []
     }
+
+    this.updateField = this.updateField.bind(this)
+    this.save        = this.save.bind(this)
+    this.clear       =  this.clear.bind(this)
   }
 
   clear(){
@@ -72,7 +76,7 @@ class User extends Component {
               name  = 'name'
               value = { this.state.user.name }
               placeholder = 'Digite o nome'
-              fn = { e => this.updateField(e) }
+              fn = { this.updateField }
               />
           </Grid>
 
@@ -82,17 +86,17 @@ class User extends Component {
               name  = 'email'
               value = { this.state.user.email }
               placeholder = 'Digite o e-mail'
-              fn = { e => this.updateField(e) }
+              fn = { this.updateField }
               />
           </Grid>
         </Row>
         <Row>
           <Grid cols='12'>
-            <Button classes='btn btn-primary' fn={e => this.save(e)}>
+            <Button classes='btn btn-primary' fn={this.save}>
               Salvar
             </Button>
 
-            <Button classes='btn btn-secondary ml-2' fn={e => this.clear(e)}>
+            <Button classes='btn btn-secondary ml-2' fn={this.clear}>
               Cancelar
             </Button>
 
