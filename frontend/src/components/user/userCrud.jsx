@@ -30,19 +30,17 @@ class User extends Component {
   constructor(props){
     super(props)
 
-    this.state = {
-      user: { name:'', email:'' },
-      list: []
-    }
+    this.state = { ...initialState }
 
-    this.updateField = this.updateField.bind(this)
-    this.save        = this.save.bind(this)
-    this.clear       =  this.clear.bind(this)
+    this.updateField  = this.updateField.bind(this)
+    this.save         = this.save.bind(this)
+    this.clear        = this.clear.bind(this)
   }
 
-  componentWillMount(){
-    axios(baseURL)
-      .then(resp => this.setState({ list: resp.data }))
+  componentWillMount() {
+    axios(baseURL).then(resp => {
+        this.setState({ list: resp.data })
+    })
   }
 
   clear(){
@@ -61,9 +59,10 @@ class User extends Component {
       })
   }
 
-  getUpdatedList(user){
+  getUpdatedList(user, add = true){
     const list = this.state.list.filter(u => u.id !== user.id)
-    list.unshift(user)
+
+    if(add) list.unshift(user)
 
     return list
   }
@@ -101,11 +100,15 @@ class User extends Component {
         </Row>
         <Row>
           <Grid cols='12'>
-            <Button classes='btn btn-primary' fn={this.save}>
+            <Button
+              classes='btn btn-primary'
+              fn = {this.save} >
               Salvar
             </Button>
 
-            <Button classes='btn btn-secondary ml-2' fn={this.clear}>
+            <Button
+              classes='btn btn-secondary ml-2'
+              fn = {this.clear} >
               Cancelar
             </Button>
 
@@ -115,25 +118,16 @@ class User extends Component {
     )
   }
 
-  renderRows(){
-    return this.state.list.map(user => {
-      return (
-        <tr key={user.id}>
-          <td>{user.id}</td>
-          <td>{user.name}</td>
-          <td>{user.email}</td>
-          <td>
-            <Button classes='btn btn-warning'>
-              <i className='fa fa-pencil'></i>
-            </Button>
+  renderLoad(user){
+    this.setState({ user })
+  }
 
-            <Button classes='btn btn-danger ml-2'>
-              <i className='fa fa-trash'></i>
-            </Button>
-          </td>
-        </tr>
-      )
-    })
+  renderRemove(user){
+    axios.delete(`${baseURL}/${user.id}`)
+      .then(resp => {
+        const list = this.getUpdatedList(user, false)
+        this.setState({ list })
+      })
   }
 
   renderTable(){
@@ -150,6 +144,27 @@ class User extends Component {
         </Tbody>
       </Table>
     )
+  }
+
+  renderRows(){
+    return this.state.list.map(user => {
+      return (
+        <tr key={user.id}>
+          <td>{user.id}</td>
+          <td>{user.name}</td>
+          <td>{user.email}</td>
+          <td>
+            <Button classes='btn btn-warning' fn={() => this.renderLoad(user)}>
+              <i className='fa fa-pencil'></i>
+            </Button>
+
+            <Button classes='btn btn-danger ml-2' fn={() => this.renderRemove(user)}>
+              <i className='fa fa-trash'></i>
+            </Button>
+          </td>
+        </tr>
+      )
+    })
   }
 
   render(){

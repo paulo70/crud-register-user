@@ -1,34 +1,19 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Hurtmold",
-      "email": "hurtmold@gmail.com"
+      "name": "Hunker",
+      "email": "hunker@gmail.com",
+      "id": 1
     },
     {
-      "id": 2,
-      "name": "Fugazi",
-      "email": "fugazi@gmail.com"
+      "name": "letuska",
+      "email": "letuska@gmail.com",
+      "id": 2
     },
     {
-      "name": "mureta",
-      "email": "mureta@gmail.com",
+      "name": "Finger",
+      "email": "Finger@gmail.com",
       "id": 3
-    },
-    {
-      "name": "hosoi",
-      "email": "hosoi@gmail.com",
-      "id": 4
-    },
-    {
-      "name": "bolota",
-      "email": "bolota@gmail.com",
-      "id": 5
-    },
-    {
-      "name": "coltrane",
-      "email": "coltrane@gmail.com",
-      "id": 6
     }
   ]
 }
